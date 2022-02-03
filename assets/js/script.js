@@ -47,7 +47,7 @@ var getPlace = function (user) {
 
 // fetch api for country lookup function
 
-function placeLookup(event){
+function placeLookup (event){
     event.preventDefault();
     var searchPlace = place.val();
     var apiUrl = "https://api.flightapi.io/place/" + apiKey + "/" + searchPlace;
@@ -55,19 +55,25 @@ function placeLookup(event){
     fetch(apiUrl)
      .then(function (response){
         if(response.ok){
-           return response.json();
+           response.json().then(function (data){
+               console.log(data);
+           })
         }
-     }
-     .then(function (data) {
-        console.log(data);
-        // displayPlace(data);
-    })
-     )};
+     })
+    }
+
 
 // display places that have been requested
 
-function displayPlace(){
 
-    $("#test").val(response)
 
-}
+// default api location lookup
+// var requestOptions = {
+//     method: 'GET',
+//     redirect: 'follow'
+//   };
+  
+//   fetch("https://api.flightapi.io/place/61fb35cdce579974df992768/london", requestOptions)
+//     .then(response => response.text())
+//     .then(result => console.log(result))
+//     .catch(error => console.log('error', error));
