@@ -76,18 +76,23 @@ function displayAirport(data){
 
 
 //Covid Information
-
-
-
-
-
-
-
-
-
-
-
-
+function displayCovid(data){
+    var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1';
+    //console.log(queryCovidURL);
+    fetch(queryCovidURL)
+        .then(function (res)   {
+            return res.json()
+        })
+    .then(function (data) {
+        console.log(data);
+        for(var i=0; i<data.length; i++){
+            var searchCity = data[i].country;
+            var searchTodayCount = data[i].todayCases;
+            console.log(searchCity);
+            console.log(searchTodayCount);
+        }
+    })
+}
 
 
 //Crime Rates
