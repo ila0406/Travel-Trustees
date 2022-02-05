@@ -1,7 +1,7 @@
 // variables
 
 var search = $("#search-submit");
-apiKey = '61fb35cdce579974df992768';
+apiKey = '61fececece579974df99276a';
 place = $("#search")
 var locationDisplay = $("#location");
 
@@ -14,6 +14,15 @@ console.log("Hello!")
 
 // This is the event for when the user clicks on the search button
 $(search).click(placeLookup);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -59,7 +68,6 @@ function placeLookup (event){
             }
         })
         .then(data => {
-            console.log(data.suggestions[0]);
             displayAirport(data);
         })
 
@@ -81,7 +89,8 @@ function displayAirport(data){
             }
         })
         .then(data => {
-            console.log(data);
+            var airports = data["Nearby Airports"][0].Code;
+            console.log(airports);
             locationDisplay.textContent = data;
         })
     }
@@ -91,13 +100,14 @@ function displayAirport(data){
 
 
 
-// default api location lookup
-// var requestOptions = {
-//     method: 'GET',
-//     redirect: 'follow'
-//   };
-  
-//   fetch("https://api.flightapi.io/place/61fb35cdce579974df992768/london", requestOptions)
-//     .then(response => response.text())
-//     .then(result => console.log(result))
-//     .catch(error => console.log('error', error));
+
+
+
+
+
+
+
+
+
+
+
