@@ -60,6 +60,53 @@ function displayAirport(data){
 }
 
 
+// Weather Information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Covid Information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Crime Rates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
