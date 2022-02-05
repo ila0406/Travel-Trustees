@@ -22,6 +22,7 @@ function placeLookup (event){
     event.preventDefault();
     var searchPlace = place.val();
     var apiUrl = "https://api.flightapi.io/place/" + apiKey + "/" + searchPlace;
+    alert(apiUrl);
     fetch(apiUrl)
         .then(response =>{
             if (response.ok){
@@ -38,11 +39,11 @@ function placeLookup (event){
 // display places that have been requested
 
 function displayAirport(data){
-    // for (var i=0; i<data.suggestions.length; i++){
-        var magicKey = data.suggestions[0].magicKey
+    for (var i=0; i<data.suggestions.length; i++){
+        var magicKey = data.suggestions[i].magicKey
         var country = "UK"
         var apiUrl = "https://api.flightapi.io/nearby/" + apiKey + "?country=" + country + "&token=" + magicKey
-        // console.log(apiUrl);
+        console.log(apiUrl);
         fetch(apiUrl)
         .then(response =>{
             if (response.ok){
@@ -50,12 +51,11 @@ function displayAirport(data){
             }
         })
         .then(data => {
-            for (var i=0; i<data["Nearby Airports"].length; i++){
-            var localAirport = data["Nearby Airports"][i].Airport;
-            console.log(localAirport);
-            }
+            var airports = data["Nearby Airports"][0].Code;
+            console.log(airports);
+            locationDisplay.textContent = data;
         })
-    // }
+    }
 
 }
 
