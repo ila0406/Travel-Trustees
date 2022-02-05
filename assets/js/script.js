@@ -16,44 +16,6 @@ console.log("Hello!")
 $(search).click(placeLookup);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// functions
-// ---------------------------------------------------------------- //
-
-
-// var getPlace = function (user) {
-//     var apiUrl = 'https://api.flightapi.io/place/' + apiKey + place;
-  
-//     fetch(apiUrl)
-//       .then(function (response) {
-//         if (response.ok) {
-//           console.log(response);
-//           response.json().then(function (data) {
-//             console.log(data);
-//             displayPlace(data, user);
-//           });
-//         } else {
-//           alert('Error: ' + response.statusText);
-//         }
-//       })
-//       .catch(function (error) {
-//         alert('Unable to connect to GitHub');
-//       });
-//   };
-
-
-
 // fetch api for country lookup function
 
 function placeLookup (event){
@@ -98,7 +60,54 @@ function displayAirport(data){
 }
 
 
-// var airports = data["Nearby Airports"][0].Airports;
+// Weather Information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Covid Information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Crime Rates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
