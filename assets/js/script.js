@@ -2,12 +2,14 @@
 
 var search = $("#search-submit");
 geocodeApiKey = "a19e123a3b1cf7f00d08b299db07954c";
-apiKey = "6201ca75706cee74ed57a823";
+apiKey = "37ee8ade-ff48-4981-9af3-394163c2c764";
 place = $("#search")
 var locationDisplay = $("#location");
 locationNameSelector = $("#search");
-// console.log("Hello!")
+
 var searchCountry;
+console.log("Hello!")
+distance = 50;
 
 
 // events
@@ -22,7 +24,7 @@ function geocode(event){
     var cityName = locationNameSelector.val();
     console.log(cityName);
     limit = "1";
-    var geocodeUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&" + "limit=" + limit + "&appid=" + geocodeApiKey;
+    var geocodeUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&" + "limit=" + limit + "&appid=" + geocodeApiKey;
     console.log(geocodeUrl);
     event.preventDefault();
     fetch(geocodeUrl)
@@ -36,11 +38,31 @@ function geocode(event){
             console.log(data[0].lon);
             searchCountry=data[0].country; //Passing Country to Covid API
             console.log('This is the Country being used in Covid Function: ' + searchCountry);
-    
+            nearbyAirports(data);
         })
     
     
     }
+
+
+// gets nearby Airports from API endpoint
+
+function nearbyAirports(data){
+    lat = data[0].lat
+    lon = data[0].lon
+    airportsUrl = "https://airlabs.co/api/v9/nearby?lat=" + lat + "&lng=" + lon + "&distance=" + distance + "&api_key=" + apiKey;
+    console.log(airportsUrl);
+    fetch(airportsUrl)
+    .then(response => {
+        if(response.ok)
+        return response.json();
+    })
+    .then(data =>{
+        console.log(data.response);//["airports"][0]["name"]);
+    })
+
+
+}
 
 function placeLookup (event){
     event.preventDefault();
@@ -61,6 +83,7 @@ function placeLookup (event){
     }
 
 // display places that have been requested
+
 
 function displayAirport(data){
     // for (var i=0; i<data.suggestions.length; i++){
