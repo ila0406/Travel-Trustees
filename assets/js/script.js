@@ -6,6 +6,8 @@ apiKey = "37ee8ade-ff48-4981-9af3-394163c2c764";
 place = $("#search")
 var locationDisplay = $("#location");
 locationNameSelector = $("#search");
+
+var searchCountry;
 console.log("Hello!")
 distance = 50;
 
@@ -15,7 +17,7 @@ distance = 50;
 
 // This is the event for when the user clicks on the search button
 $(search).click(geocode);
-
+$(search).click(displayCovid);
 
 // Geocode API
 function geocode(event){
@@ -34,6 +36,8 @@ function geocode(event){
         .then(function(data) {
             console.log(data[0].lat);
             console.log(data[0].lon);
+            searchCountry=data[0].country; //Passing Country to Covid API
+            console.log('This is the Country being used in Covid Function: ' + searchCountry);
             nearbyAirports(data);
         })
     
@@ -121,32 +125,53 @@ function displayAirport(data){
 
 //Covid Information
 function displayCovid(data){
+    var searchCity = '';
+    var searchTodayCount = '';
+    // console.log(search);    
     var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1';
-    //console.log(queryCovidURL);
+
     fetch(queryCovidURL)
         .then(function (res)   {
             return res.json()
         })
     .then(function (data) {
-        console.log(data);
-        for(var i=0; i<data.length; i++){
-            var searchCity = data[i].country;
-            var searchTodayCount = data[i].todayCases;
+        // console.log(data);
+        console.log('Output list of countries + covid cases')
+        for(var i=0; i<data.length; i++) {
+            searchCity = data[i].country;
+            searchTodayCount = data[i].todayCases;
             console.log(searchCity);
             console.log(searchTodayCount);
         }
+        if (searchCountry == 'US'){
+          
+        }
+        else if (searchCountry == 'GB'){
+        
+        }
+        else if (searchCountry == 'NZ'){
+
+        }
+        else if (searchCountry == 'CA'){
+
+        }
+        else if (searchCountry == 'MX'){
+
+        }
+        else    {
+        }
     })
-    return `<div class="">
-    <div
-        class="">
-      <div>
-        <div class="">${searchCity}</div>
-          <p class="">
-          </p>
-          <p class="">${searchTodayCount}</p>
-      </div>
-  </div>`
-  .join("");
+//     return `<div class="">
+//     <div
+//         class="">
+//       <div>
+//         <div class="">${searchCity}</div>
+//           <p class="">
+//           </p>
+//           <p class="">${searchTodayCount}</p>
+//       </div>
+//   </div>`
+//   .join("");
 }
 
 
