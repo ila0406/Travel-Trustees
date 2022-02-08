@@ -41,7 +41,7 @@ function placeLookup (event){
 function displayAirport(data){
     for (var i=0; i<data.suggestions.length; i++){
         var magicKey = data.suggestions[i].magicKey
-        var country = "UK"
+        var country = document.getElementById("options").value;
         var apiUrl = "https://api.flightapi.io/nearby/" + apiKey + "?country=" + country + "&token=" + magicKey
         console.log(apiUrl);
         fetch(apiUrl)
