@@ -2,7 +2,7 @@
 Here is a link to the functioning web page.
 - https://ila0406.github.io/Travel-Trustees/
 ## Description
-This App was built with the intention of being a safety tool for your travel needs. It will puul relevent information for your destination to make your travel a safe and fun trip. If you search for any city in the countries we provided you will be met with a list that includes:
+This App was built with the intention of being a safety tool for your travel needs. It will pull relevent information for your destination to make your travel a safe and fun trip. If you search for any city in the countries we provided you will be met with a list that includes:
 - Covid cases
 - Local weather and Air quality
 - Airports near your destination
@@ -15,7 +15,7 @@ This App was built with the intention of being a safety tool for your travel nee
 ## User Story
 ## Accessibility
 Lighthouse report on accesibility
-![Lighthouse](./assets/img/lighthouse.png)
+![Lighthouse](./assets/img/accessibility.png)
 ### Mockup
 ![mockup](./assets/images/mockup.gif)
 ## Usage
