@@ -3,6 +3,18 @@ body {
     color: black;
 }
 
+header {
+    padding: 30px;
+    clear: both;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+form    {
+    text-align: center;
+}
+
 
 footer {
     padding: 30px;
