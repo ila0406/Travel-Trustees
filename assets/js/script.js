@@ -92,6 +92,17 @@ function displayCovid(data){
             console.log(searchTodayCount);
         }
     })
+    return `<div class="">
+    <div
+        class="">
+      <div>
+        <div class="">${searchCity}</div>
+          <p class="">
+          </p>
+          <p class="">${searchTodayCount}</p>
+      </div>
+  </div>`
+  .join("");
 }
 
 
