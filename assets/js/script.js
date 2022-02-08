@@ -22,7 +22,7 @@ function geocode(event){
     var cityName = locationNameSelector.val();
     console.log(cityName);
     limit = "1";
-    var geocodeUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&" + "limit=" + limit + "&appid=" + geocodeApiKey;
+    var geocodeUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "&" + "limit=" + limit + "&appid=" + geocodeApiKey;
     console.log(geocodeUrl);
     event.preventDefault();
     fetch(geocodeUrl)
