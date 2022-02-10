@@ -169,15 +169,18 @@ function forecast(data){
 function displayCovid(data){
     var searchCity = '';
     var searchTodayCount = '';
-    // console.log(search);    
+    console.log(search);    
     var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1';
+    var population = '';
+    var casePerMillion = '';
+    var todayCases = '';
 
     fetch(queryCovidURL)
         .then(function (res)   {
             return res.json()
         })
     .then(function (data) {
-        // console.log(data);
+        console.log(data);
         console.log('Output list of countries + covid cases')
         searchBody.innerHTML = "";
 
@@ -201,19 +204,42 @@ function displayCovid(data){
             // console.log(searchTodayCount);
         }
         if (searchCountry == 'US'){
+            population = data[212]["population"];
+            casePerMillion = data[212]["casesPerOneMillion"];
+            todayCases = data[212]["todayCases"];
+
+            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
+            
           
         }
         else if (searchCountry == 'GB'){
+            population = data[211]["population"];
+            casePerMillion = data[211]["casesPerOneMillion"];
+            todayCases = data[211]["todayCases"];
+            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
         
         }
         else if (searchCountry == 'NZ'){
+            population = data[146]["population"];
+            casePerMillion = data[146]["casesPerOneMillion"];
+            todayCases = data[146]["todayCases"];
+
+            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
 
         }
         else if (searchCountry == 'CA'){
+            population = data[35]["population"];
+            casePerMillion = data[35]["casesPerOneMillion"];
+            todayCases = data[35]["todayCases"];
 
+            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
         }
         else if (searchCountry == 'MX'){
+            population = data[132]["population"];
+            casePerMillion = data[132]["casesPerOneMillion"];
+            todayCases = data[132]["todayCases"];
 
+            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
         }
         else    {
         }
