@@ -167,6 +167,7 @@ function forecast(data){
 
 //Covid Information
 function displayCovid(data){
+    covidContentEl.innerHTML=''
     var searchCity = '';
     var searchTodayCount = '';
     console.log(search);    
@@ -174,6 +175,8 @@ function displayCovid(data){
     var population = '';
     var casePerMillion = '';
     var todayCases = '';
+
+    var covidCard = document.createElement("div")
 
     fetch(queryCovidURL)
         .then(function (res)   {
@@ -208,7 +211,25 @@ function displayCovid(data){
             casePerMillion = data[212]["casesPerOneMillion"];
             todayCases = data[212]["todayCases"];
 
-            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
+
+           var populationEl = document.createElement("p");
+           var casePerMillionEl = document.createElement("p");
+           var todayCasesEl = document.createElement("p");
+
+            $(populationEl).text(`Population: ${population}`);
+            $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+            $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+
+            covidCard.append(populationEl);
+            covidCard.append(casePerMillionEl);
+            covidCard.append(todayCasesEl);
+            covidContentEl.append(covidCard);
+
+
+
+
+
+
             
           
         }
@@ -216,7 +237,20 @@ function displayCovid(data){
             population = data[211]["population"];
             casePerMillion = data[211]["casesPerOneMillion"];
             todayCases = data[211]["todayCases"];
-            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
+
+            var populationEl = document.createElement("p");
+            var casePerMillionEl = document.createElement("p");
+            var todayCasesEl = document.createElement("p");
+ 
+             $(populationEl).text(`Population: ${population}`);
+             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+ 
+             covidCard.append(populationEl);
+             covidCard.append(casePerMillionEl);
+             covidCard.append(todayCasesEl);
+             covidContentEl.append(covidCard);
+
         
         }
         else if (searchCountry == 'NZ'){
@@ -224,7 +258,20 @@ function displayCovid(data){
             casePerMillion = data[146]["casesPerOneMillion"];
             todayCases = data[146]["todayCases"];
 
-            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
+            var populationEl = document.createElement("p");
+            var casePerMillionEl = document.createElement("p");
+            var todayCasesEl = document.createElement("p");
+ 
+             $(populationEl).text(`Population: ${population}`);
+             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+ 
+             covidCard.append(populationEl);
+             covidCard.append(casePerMillionEl);
+             covidCard.append(todayCasesEl);
+             covidContentEl.append(covidCard);
+
+
 
         }
         else if (searchCountry == 'CA'){
@@ -232,14 +279,40 @@ function displayCovid(data){
             casePerMillion = data[35]["casesPerOneMillion"];
             todayCases = data[35]["todayCases"];
 
-            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
+            var populationEl = document.createElement("p");
+            var casePerMillionEl = document.createElement("p");
+            var todayCasesEl = document.createElement("p");
+ 
+             $(populationEl).text(`Population: ${population}`);
+             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+ 
+             covidCard.append(populationEl);
+             covidCard.append(casePerMillionEl);
+             covidCard.append(todayCasesEl);
+             covidContentEl.append(covidCard);
+
+
         }
         else if (searchCountry == 'MX'){
             population = data[132]["population"];
             casePerMillion = data[132]["casesPerOneMillion"];
             todayCases = data[132]["todayCases"];
 
-            console.log(`Population: ${population} Cases per Million: ${casePerMillion} Todays cases: ${todayCases}`);
+            var populationEl = document.createElement("p");
+            var casePerMillionEl = document.createElement("p");
+            var todayCasesEl = document.createElement("p");
+ 
+             $(populationEl).text(`Population: ${population}`);
+             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+ 
+             covidCard.append(populationEl);
+             covidCard.append(casePerMillionEl);
+             covidCard.append(todayCasesEl);
+             covidContentEl.append(covidCard);
+
+
         }
         else    {
         }
