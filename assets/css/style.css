@@ -15,6 +15,9 @@ form    {
     text-align: center;
 }
 
+.hide {
+    display: none;
+  }
 
 footer {
     padding: 30px;
