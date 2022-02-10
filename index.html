@@ -38,12 +38,21 @@
             <input id="search" class="form-input" type="text" placeholder="City Name!">
             <button id ="search-submit" class="btn btn-main bg-sky-600 hover:bg-sky-700">Begin Search</button>
           </form>
-        </div>
+        
       </div>
 
-      <div class="col-12 col-md-9 p-3 text-light">
-        <h2>Here are your Safe Search results... <span id="search-text"></span></h2>
-        <div id="search-content"></div>
+      <div class="search-results mx-auto px-10 bg-gradient-to-r from-sky-500 to-indigo-500">
+        <div id="results-container">
+        <!-- <h2>Showing results for <span id="search-text"></span></h2> -->
+        <blockquote class="p-main text-2xl font-semibold italic text-center text-slate-900">
+          Showing results for 
+          <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block">
+            <span class="relative text-white">Location</span>
+          </span>
+          .......
+        </blockquote>
+        <div id="search-content class="box-content h-32 w-100 p-4 border-4"></div></div>
+      </div>
       </div>
 
 

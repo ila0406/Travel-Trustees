@@ -14,6 +14,9 @@ var searchCountry;
 console.log("Hello!")
 distance = 50;
 
+var resultsContainerEl = document.getElementById('results-container');
+resultsContainerEl.setAttribute('class', 'hide');
+
 
 // events
 
@@ -42,6 +45,7 @@ function geocode(event){
             searchCountry=data[0].country; //Passing Country to Covid API
             console.log('This is the Country being used in Covid Function: ' + searchCountry);
             nearbyAirports(data);
+            resultsContainerEl.removeAttribute('class');
         })
     
     
