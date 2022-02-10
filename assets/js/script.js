@@ -83,49 +83,6 @@ function nearbyAirports(data){
 
 }
 
-// function placeLookup (event){
-//     event.preventDefault();
-//     var searchPlace = place.val();
-//     var apiUrl = "https://api.flightapi.io/place/" + apiKey + "/" + searchPlace;
-//     alert(apiUrl);
-//     fetch(apiUrl)
-//         .then(response =>{
-//             if (response.ok){
-//                 return response.json();
-//             }
-//         })
-//         .then(data => {
-//             displayAirport(data);
-//         })
-
-     
-//     }
-
-// display places that have been requested
-
-
-// function displayAirport(data){
-//     // for (var i=0; i<data.suggestions.length; i++){
-//         var magicKey = data.suggestions[0].magicKey
-//         var country = document.getElementById("options").value;
-//         console.log(country);
-//         var apiUrl = "https://api.flightapi.io/nearby/" + apiKey + "?country=" + country + "&token=" + magicKey
-//         console.log(apiUrl);
-//         fetch(apiUrl)
-//         .then(response =>{
-//             if (response.ok){
-//                 return response.json();
-//             }
-//         })
-//         .then(data => {
-//             var airports = data["Nearby Airports"];
-//             console.log(airports);
-//             locationDisplay.textContent = data;
-//         })
-//     // }
-
-// }
-
 
 // Weather Information
 
