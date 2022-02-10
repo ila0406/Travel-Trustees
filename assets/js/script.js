@@ -5,6 +5,8 @@ var covidContentEl = document.querySelector('#covid-content');
 var searchFormEl = document.querySelector('#search-form');
 var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
+var forecastCard = document.createElement('div');
+var forecastBody = $("")
 
 var search = $("#search-submit");
 geocodeApiKey = "a19e123a3b1cf7f00d08b299db07954c";
@@ -47,6 +49,7 @@ function geocode(event){
             console.log(data[0].lon);
             searchCountry=data[0].country; //Passing Country to Covid API
             console.log('This is the Country being used in Covid Function: ' + searchCountry);
+            weatherSearch(data);
             nearbyAirports(data);
             resultsContainerEl.removeAttribute('class');
         })
@@ -93,6 +96,61 @@ function nearbyAirports(data){
 
 
 // Weather Information
+
+
+function weatherSearch(data){
+    var lat = data[0].lat;
+    var lon = data[0].lon;
+    weatherApiUrl = "https://api.openweathermap.org/data/2.5/onecall?" + "lat=" + lat + "&lon=" + lon + "&units=imperial" + "&appid=" + geocodeApiKey;
+    fetch(weatherApiUrl)
+    .then(response =>{
+        if(response.ok){
+            return response.json()
+        }
+    })
+    .then(data =>{
+        forecast(data)
+    })
+}
+
+function forecast(data){
+    for (i=0; i<5; i++){
+        var cityName = locationNameSelector.val();
+        forecastWicon = data["daily"][i]["weather"][0].icon;
+        var forecastIconUrl = "https://openweathermap.org/img/wn/" + forecastWicon + ".png";
+
+        forecastDay = data["daily"][i].dt;
+
+        forecastWind = data["daily"][i].wind_speed;
+        forecastTemp =  data["daily"][i].temp.max;
+        forecastHumidity = data["daily"][i].humidity;
+
+        forecastWiconEl = document.createElement("img");
+        forecastDayEl = document.createElement("p");
+        forecastTempEl = document.createElement("p");
+        forecastWindEl = document.createElement("p");
+        forecastHumidityEl = document.createElement("p");
+
+        $(forecastWiconEl).attr("id", "wicon");
+        $(forecastWiconEl).attr("src", forecastIconUrl);
+        $(forecastWiconEl).attr("alt", "weather icon");
+
+       $(forecastTempEl).text(`Temp ${forecastTemp} F`);
+       $(forecastDayEl).text(` ${cityName}`);
+       $(forecastWindEl).text(`Wind: ${forecastWind} MPH`);
+       $(forecastHumidityEl).text(`Humidity ${forecastHumidity} %`);
+
+        forecastCard.classList.add("forecastCard");
+        forecastCard.append(forecastWiconEl);
+        forecastCard.append(forecastDayEl);
+        forecastCard.append(forecastTempEl);
+        forecastCard.append(forecastWindEl);
+        forecastCard.append(forecastHumidityEl);
+
+       forecastBody.append(forecastCard);
+       console.log(data["daily"][i])
+    }
+}
 
 
 
