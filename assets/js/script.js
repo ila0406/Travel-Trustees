@@ -2,6 +2,8 @@
 var searchTextEl = document.querySelector('#search-text');
 var searchContentEl = document.querySelector('#search-content');
 var searchFormEl = document.querySelector('#search-form');
+var searchCard = document.createElement('div');
+var searchBody = document.createElement('ul');
 
 var search = $("#search-submit");
 geocodeApiKey = "a19e123a3b1cf7f00d08b299db07954c";
@@ -66,15 +68,14 @@ function nearbyAirports(data){
     })
     .then(data =>{
         console.log(data.response);
-        var searchCard = document.createElement('div');
-        var searchBody = document.createElement('ul');
-        var airport = data.response["airports"]
+
+        searchBody.innerHTML = "";
+
 
         searchCard.classList.add('card',);
         searchBody.classList.add('card-body');
 
-
-        for (i=0; i<airport.length; i++) {
+        for (i=0; i<5; i++) {
             var airportName = data.response["airports"][i]["name"]
             var bodyContentEl = document.createElement('li');
             $(bodyContentEl).text(airportName);
@@ -161,8 +162,6 @@ function displayCovid(data){
 
 
 //Crime Rates
-
-
 
 
 
