@@ -1,6 +1,7 @@
 // variables
 var searchTextEl = document.querySelector('#search-text');
 var searchContentEl = document.querySelector('#search-content');
+var covidContentEl = document.querySelector('#covid-content');
 var searchFormEl = document.querySelector('#search-form');
 var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
@@ -72,9 +73,6 @@ function nearbyAirports(data){
         searchBody.innerHTML = "";
 
 
-        searchCard.classList.add('card',);
-        searchBody.classList.add('card-body');
-
         for (i=0; i<5; i++) {
             var airportName = data.response["airports"][i]["name"]
             var bodyContentEl = document.createElement('li');
@@ -123,11 +121,26 @@ function displayCovid(data){
     .then(function (data) {
         // console.log(data);
         console.log('Output list of countries + covid cases')
-        for(var i=0; i<data.length; i++) {
+        searchBody.innerHTML = "";
+
+        for (i=0; i<5; i++) {
+            var countryName = data[i].country
+            var bodyContentEl = document.createElement('li');
+            $(bodyContentEl).text(countryName);
+            searchBody.append(bodyContentEl);
+        }
+        searchCard.append(searchBody);
+        covidContentEl.append(searchCard);
+    
+        for(var i=0; i<5; i++) {
             searchCity = data[i].country;
             searchTodayCount = data[i].todayCases;
-            console.log(searchCity);
-            console.log(searchTodayCount);
+            var countryName = data[i].country
+            var bodyContentEl = document.createElement('li');
+            $(bodyContentEl).text(countryName);
+            searchBody.append(bodyContentEl);
+            // console.log(searchCity);
+            // console.log(searchTodayCount);
         }
         if (searchCountry == 'US'){
           
@@ -146,6 +159,8 @@ function displayCovid(data){
         }
         else    {
         }
+        searchCard.append(searchBody);
+        searchContentEl.append(searchCard);
     })
 
 }
