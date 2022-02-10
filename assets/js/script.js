@@ -66,27 +66,24 @@ function nearbyAirports(data){
     })
     .then(data =>{
         console.log(data.response);
-        var airportNameArray = [];
         var searchCard = document.createElement('div');
-        var searchBody = document.createElement('div');
-        var titleEl = document.createElement('h3');
-        var bodyContentEl = document.createElement('p');
+        var searchBody = document.createElement('ul');
         var airport = data.response["airports"]
 
-        searchCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
+        searchCard.classList.add('card',);
         searchBody.classList.add('card-body');
 
-        for (i=0; i<airport.length; i++) {
-            airportNameArray.unshift(`${data.response["airports"][i]["name"]}`);
-            console.log(airportNameArray);
-        }
 
-        searchBody.append(titleEl);
-        searchBody.append(airportNameArray);
+        for (i=0; i<airport.length; i++) {
+            var airportName = data.response["airports"][i]["name"]
+            var bodyContentEl = document.createElement('li');
+            $(bodyContentEl).text(airportName);
+            searchBody.append(bodyContentEl);
+        }
         searchCard.append(searchBody);
         searchContentEl.append(searchCard);
 
-        $(titleEl).text(`Nearby Airports:`)
+
 
 
     
