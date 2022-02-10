@@ -1,4 +1,7 @@
 // variables
+var searchTextEl = document.querySelector('#search-text');
+var searchContentEl = document.querySelector('#search-content');
+var searchFormEl = document.querySelector('#search-form');
 
 var search = $("#search-submit");
 geocodeApiKey = "a19e123a3b1cf7f00d08b299db07954c";
@@ -59,53 +62,69 @@ function nearbyAirports(data){
     })
     .then(data =>{
         console.log(data.response);//["airports"][0]["name"]);
+        var searchCard = document.createElement('div');
+        searchCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
+      
+        var searchBody = document.createElement('div');
+        searchBody.classList.add('card-body');
+        searchCard.append(searchBody);
+      
+        var titleEl = document.createElement('h3');
+        titleEl.textContent = data[1];
+      
+        var bodyContentEl = document.createElement('p');
+        bodyContentEl.innerHTML = '<strong>Subjects:</strong> ' + data[1] + '<br/>';
+                
+        searchBody.append(titleEl, bodyContentEl);
+
+        searchContentEl.append(searchCard);
     })
 
 
 }
 
-function placeLookup (event){
-    event.preventDefault();
-    var searchPlace = place.val();
-    var apiUrl = "https://api.flightapi.io/place/" + apiKey + "/" + searchPlace;
-    alert(apiUrl);
-    fetch(apiUrl)
-        .then(response =>{
-            if (response.ok){
-                return response.json();
-            }
-        })
-        .then(data => {
-            displayAirport(data);
-        })
+// function placeLookup (event){
+//     event.preventDefault();
+//     var searchPlace = place.val();
+//     var apiUrl = "https://api.flightapi.io/place/" + apiKey + "/" + searchPlace;
+//     alert(apiUrl);
+//     fetch(apiUrl)
+//         .then(response =>{
+//             if (response.ok){
+//                 return response.json();
+//             }
+//         })
+//         .then(data => {
+//             displayAirport(data);
+//         })
 
      
-    }
+//     }
 
 // display places that have been requested
 
 
-function displayAirport(data){
-    // for (var i=0; i<data.suggestions.length; i++){
-        var magicKey = data.suggestions[0].magicKey
-        var country = document.getElementById("options").value;
-        console.log(country);
-        var apiUrl = "https://api.flightapi.io/nearby/" + apiKey + "?country=" + country + "&token=" + magicKey
-        console.log(apiUrl);
-        fetch(apiUrl)
-        .then(response =>{
-            if (response.ok){
-                return response.json();
-            }
-        })
-        .then(data => {
-            var airports = data["Nearby Airports"];
-            console.log(airports);
-            locationDisplay.textContent = data;
-        })
-    // }
+// function displayAirport(data){
+//     // for (var i=0; i<data.suggestions.length; i++){
+//         var magicKey = data.suggestions[0].magicKey
+//         var country = document.getElementById("options").value;
+//         console.log(country);
+//         var apiUrl = "https://api.flightapi.io/nearby/" + apiKey + "?country=" + country + "&token=" + magicKey
+//         console.log(apiUrl);
+//         fetch(apiUrl)
+//         .then(response =>{
+//             if (response.ok){
+//                 return response.json();
+//             }
+//         })
+//         .then(data => {
+//             var airports = data["Nearby Airports"];
+//             console.log(airports);
+//             locationDisplay.textContent = data;
+//         })
+//     // }
 
-}
+// }
 
 
 // Weather Information
