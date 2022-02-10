@@ -73,7 +73,7 @@ function nearbyAirports(data){
         titleEl.textContent = data[1];
       
         var bodyContentEl = document.createElement('p');
-        bodyContentEl.innerHTML = '<strong>Subjects:</strong> ' + data[1] + '<br/>';
+        bodyContentEl.innerHTML = '<strong>Airport:</strong> ' + data[1] + '<br/>';
                 
         searchBody.append(titleEl, bodyContentEl);
 
