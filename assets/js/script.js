@@ -89,52 +89,12 @@ function nearbyAirports(data){
         $(titleEl).text(`Nearby Airports:`)
 
 
-
-    //     var searchCard = document.createElement('div');
-    //     searchCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
-      
-    //     var searchBody = document.createElement('div');
-    //     searchBody.classList.add('card-body');
-    //     searchCard.append(searchBody);
-      
-    //     var titleEl = document.createElement('h3');
-    //     titleEl.textContent = data[1];
-      
-    //     var bodyContentEl = document.createElement('p');
-    //     bodyContentEl.innerHTML = '<strong>Airport:</strong> ' + data[1] + '<br/>';
-                
-    //     searchBody.append(titleEl, bodyContentEl);
-
-    //     searchContentEl.append(searchCard);
-    // })
-
     
 })
 }
 
 
 
-// card generation function
-
-// var searchCard = document.createElement('div');
-// var titleEl = document.createElement('h3');
-// var bodyContentEl = document.createElement('p');
-// var airport = data.response["airports"]
-
-// searchCard.classList.add('card', 'bg-light', 'text-dark', 'mb-3', 'p-3');
-// searchBody.classList.add('card-body');
-
-// searchBody.append(titleEl, bodyContentEl);
-// searchCard.append(searchBody);
-// searchContentEl.append(searchCard);
-
-// $(titleEl).text(`Nearby Airports:`)
-
-
-// for (i=0; i<airport.length; i++) {
-    
-//     $(bodyContentEl).text(`${data.response["airports"][i]["name"]}`)
-// }
 
 // Weather Information
 
