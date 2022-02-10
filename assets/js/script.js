@@ -147,17 +147,7 @@ function displayCovid(data){
         else    {
         }
     })
-//     return `<div class="">
-//     <div
-//         class="">
-//       <div>
-//         <div class="">${searchCity}</div>
-//           <p class="">
-//           </p>
-//           <p class="">${searchTodayCount}</p>
-//       </div>
-//   </div>`
-//   .join("");
+
 }
 
 
