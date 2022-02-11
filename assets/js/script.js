@@ -16,7 +16,6 @@ var locationDisplay = $("#location");
 locationNameSelector = $("#search");
 
 var searchCountry;
-console.log("Hello!")
 distance = 50;
 
 var resultsContainerEl = document.getElementById('results-container');
@@ -59,7 +58,6 @@ function geocode(event){
 
 
 // gets nearby Airports from API endpoint
-
 function nearbyAirports(data){
     lat = data[0].lat
     lon = data[0].lon
@@ -93,11 +91,7 @@ function nearbyAirports(data){
 }
 
 
-
-
 // Weather Information
-
-
 function weatherSearch(data){
     var lat = data[0].lat;
     var lon = data[0].lon;
@@ -153,18 +147,6 @@ function forecast(data){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //Covid Information
 function displayCovid(data){
     covidContentEl.innerHTML=''
@@ -187,25 +169,6 @@ function displayCovid(data){
         console.log('Output list of countries + covid cases')
         searchBody.innerHTML = "";
 
-        for (i=0; i<5; i++) {
-            var countryName = data[i].country
-            var bodyContentEl = document.createElement('li');
-            $(bodyContentEl).text(countryName);
-            searchBody.append(bodyContentEl);
-        }
-        searchCard.append(searchBody);
-        covidContentEl.append(searchCard);
-    
-        for(var i=0; i<5; i++) {
-            searchCity = data[i].country;
-            searchTodayCount = data[i].todayCases;
-            var countryName = data[i].country
-            var bodyContentEl = document.createElement('li');
-            $(bodyContentEl).text(countryName);
-            searchBody.append(bodyContentEl);
-            // console.log(searchCity);
-            // console.log(searchTodayCount);
-        }
         if (searchCountry == 'US'){
             population = data[212]["population"];
             casePerMillion = data[212]["casesPerOneMillion"];
@@ -224,13 +187,6 @@ function displayCovid(data){
             covidCard.append(casePerMillionEl);
             covidCard.append(todayCasesEl);
             covidContentEl.append(covidCard);
-
-
-
-
-
-
-            
           
         }
         else if (searchCountry == 'GB'){
@@ -250,7 +206,6 @@ function displayCovid(data){
              covidCard.append(casePerMillionEl);
              covidCard.append(todayCasesEl);
              covidContentEl.append(covidCard);
-
         
         }
         else if (searchCountry == 'NZ'){
@@ -271,8 +226,6 @@ function displayCovid(data){
              covidCard.append(todayCasesEl);
              covidContentEl.append(covidCard);
 
-
-
         }
         else if (searchCountry == 'CA'){
             population = data[35]["population"];
@@ -292,7 +245,6 @@ function displayCovid(data){
              covidCard.append(todayCasesEl);
              covidContentEl.append(covidCard);
 
-
         }
         else if (searchCountry == 'MX'){
             population = data[132]["population"];
@@ -311,7 +263,6 @@ function displayCovid(data){
              covidCard.append(casePerMillionEl);
              covidCard.append(todayCasesEl);
              covidContentEl.append(covidCard);
-
 
         }
         else    {
