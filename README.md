@@ -14,6 +14,8 @@ This App was built with the intention of being a safety tool for your travel nee
 - [Credits](#credits)
 
 ## User Story
+- As a cautious traveler I'd like to go to one website
+- Where I will be notified of different categories of safety issues Which will let me make an informed decision on a particular destination.
 ## Accessibility
 Lighthouse report on accesibility
 ![Lighthouse](./assets/img/accessibility.png)
