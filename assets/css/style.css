@@ -28,6 +28,13 @@ form    {
     display: none;
   }
 
+#search-history {
+    text-align: center;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
 footer {
     padding: 30px;
     clear: both;
