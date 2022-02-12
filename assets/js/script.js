@@ -169,7 +169,7 @@ function forecast(data){
 function displayCovid(data){
     covidContentEl.innerHTML=''
     // console.log(search);    
-    var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1';
+    var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1&countrycode='  + searchCountry;
     var population = '';
     var casePerMillion = '';
     var todayCases = '';
