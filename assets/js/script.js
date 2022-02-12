@@ -37,10 +37,10 @@ $(search).click(travelInfo);
 // Geocode API
 function geocode(event){
     var cityName = locationName.val();
-    console.log(cityName);
+    // console.log(cityName);
     limit = '1';
     var geocodeUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&' + 'limit=' + limit + '&appid=' + geocodeApiKey;
-    console.log(geocodeUrl);
+    // console.log(geocodeUrl);
     event.preventDefault();
     fetch(geocodeUrl)
         .then(function(res) {
@@ -49,15 +49,12 @@ function geocode(event){
             }   
         })
         .then(function(data) {
-            console.log(data[0].lat);
-            console.log(data[0].lon);
             searchCountry=data[0].country; //Passing Country to Covid API
-            console.log('This is the Country being used in Covid Function: ' + searchCountry);
+            // console.log('This is the Country being used in Covid Function: ' + searchCountry);
             weatherSearch(data);
             nearbyAirports(data);
             resultsContainerEl.removeAttribute('class');
         })
-    console.log('This is the Location name: ' +cityName);
 
         // Store searched cities in Local Storage for future use
         cities.push(cityName);
@@ -82,14 +79,14 @@ function nearbyAirports(data){
     lat = data[0].lat
     lon = data[0].lon
     airportsUrl = 'https://airlabs.co/api/v9/nearby?lat=' + lat + '&lng=' + lon + '&distance=' + distance + '&api_key=' + apiKey;
-    console.log(airportsUrl);
+    // console.log(airportsUrl);
     fetch(airportsUrl)
     .then(response => {
         if(response.ok)
         return response.json();
     })
     .then(data =>{
-        console.log(data.response);
+        // console.log(data.response);
 
         searchBody.textContent = '';
 
@@ -159,7 +156,7 @@ function forecast(data){
         forecastCard.append(forecastHumidityEl);
 
        forecastBody.append(forecastCard);
-       console.log(data['daily'][i]);
+    //    console.log(data['daily'][i]);
     }
 }
 
@@ -167,7 +164,7 @@ function forecast(data){
 //Covid Information
 function displayCovid(data){
     covidContentEl.innerHTML=''
-    console.log(search);    
+    // console.log(search);    
     var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1';
     var population = '';
     var casePerMillion = '';
@@ -180,8 +177,8 @@ function displayCovid(data){
             return res.json()
         })
     .then(function (data) {
-        console.log(data);
-        console.log('Output list of countries + covid cases')
+        // console.log(data);
+        // console.log('Output list of countries + covid cases')
         searchBody.textContent = '';
 
         if (searchCountry == 'US'){
