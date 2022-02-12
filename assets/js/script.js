@@ -7,7 +7,7 @@ var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastCard = document.createElement('div');
 var forecastBody = $('weather-content')
-var travelInfoEl = document.querySelector('tbd-content');
+var travelInfoEl = $('travel-content');
 
 var search = $('#search-submit');
 geocodeApiKey = 'a19e123a3b1cf7f00d08b299db07954c';
@@ -273,10 +273,9 @@ function displayCovid(data){
 
 //Travel Safety Advisory
 function travelInfo(){
-    travelInfoEl.innerHTML= '';
-    var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=US';
+    travelInfoEl.innerHTML= ''
+    var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=us';
     var travelInfo = '';
-
     var travelCard = document.createElement('div');
 
     fetch(travelInfoURL)
@@ -285,11 +284,9 @@ function travelInfo(){
         })
     .then(function (data) {
         console.log(data['data'].US.advisory.message);
-        searchBody.innerHTML = '';
 
         if (searchCountry == 'US'){
             travelInfo = data['data'].US.advisory.message;
-
 
            var travelEl = document.createElement('p');
 
