@@ -29,6 +29,7 @@ resultsContainerEl.setAttribute('class', 'hide');
 // This is the event for when the user clicks on the search button
 $(search).click(geocode);
 $(search).click(displayCovid);
+$(search).click(travelInfo);
 
 // Geocode API
 function geocode(event){
@@ -277,7 +278,7 @@ function displayCovid(data){
 
 //Travel Safety Advisory
 function travelInfo(data){
-travelInfoEl.innerHTML=''
+// travelInfoEl.innerHTML='';
     var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=US';
     var travelInfo = '';
 
@@ -289,20 +290,20 @@ travelInfoEl.innerHTML=''
         })
     .then(function (data) {
         console.log(data);
-        // searchBody.innerHTML = "";
+        searchBody.innerHTML = "";
 
-        // if (searchCountry == 'US'){
-        //     // travelInfo = ;
+        if (searchCountry == 'US'){
+            travelInfo = data["us"];
 
 
-        //    var travelEl = document.createElement("p");
+           var travelEl = document.createElement("p");
 
-        //     $(travelEl).text(`Population: ${travelInfo}`);
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
 
-        //     travelCard.append(travelEl);
-        //     travelInfoEl.append(travelCard);
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
           
-        // }
+        }
 
     });
 }
