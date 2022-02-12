@@ -81,14 +81,12 @@ function nearbyAirports(data){
     lat = data[0].lat
     lon = data[0].lon
     airportsUrl = 'https://airlabs.co/api/v9/nearby?lat=' + lat + '&lng=' + lon + '&distance=' + distance + '&api_key=' + apiKey;
-    // console.log(airportsUrl);
     fetch(airportsUrl)
     .then(response => {
         if(response.ok)
         return response.json();
     })
     .then(data =>{
-        // console.log(data.response);
 
         searchBody.textContent = '';
 
@@ -183,8 +181,7 @@ function displayCovid(data){
             return res.json()
         })
     .then(function (data) {
-        // console.log(data);
-        // console.log('Output list of countries + covid cases')
+        console.log('Output list of countries + covid cases')
         searchBody.textContent = '';
 
         if (searchCountry == 'US'){
