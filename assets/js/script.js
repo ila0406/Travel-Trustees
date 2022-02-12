@@ -128,6 +128,8 @@ function weatherSearch(data){
 }
 
 function forecast(data){
+    forecastBody.empty();
+
     for (i=0; i<5; i++){
         forecastWicon = data['daily'][i]['weather'][0].icon;
         var forecastIconUrl = 'https://openweathermap.org/img/wn/' + forecastWicon + '.png';
@@ -140,6 +142,7 @@ function forecast(data){
 
         var forecastCard = document.createElement('div');
         var forecastWiconEl = document.createElement('img');
+        var momentDay = moment(forecastDay * 1000).format("MM/DD/YYYY");
         var forecastTempEl = document.createElement('p');
         var forecastWindEl = document.createElement('p');
         var forecastHumidityEl = document.createElement('p');
@@ -154,6 +157,7 @@ function forecast(data){
 
         forecastCard.classList.add('forecastCard');
         forecastCard.append(forecastWiconEl);
+        forecastCard.append(momentDay);
         forecastCard.append(forecastTempEl);
         forecastCard.append(forecastWindEl);
         forecastCard.append(forecastHumidityEl);
