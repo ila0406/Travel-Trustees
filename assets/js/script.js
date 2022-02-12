@@ -6,7 +6,10 @@ var searchFormEl = document.querySelector('#search-form');
 var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastBody = $('#weather-content')
-var travelInfoEl = document.querySelector('tbd-content');
+var forecastCard = document.createElement('div');
+var travelInfoEl = $('tbd-content');
+var Localstorage = localStorage;
+var cities = [];
 
 
 var search = $('#search-submit');
@@ -54,7 +57,22 @@ function geocode(event){
             nearbyAirports(data);
             resultsContainerEl.removeAttribute('class');
         })
+    console.log('This is the Location name: ' +cityName);
+
+        // Store searched cities in Local Storage for future use
+        cities.push(cityName);
+        //cities.push(locationNameS);
+        localStorage.setItem('cities', JSON.stringify(cities));
+        var citiesArray = JSON.parse(Localstorage.getItem('cities'));
     
+        var cittiesList = document.querySelector('ul');
+        var newCity = citiesArray.length - 1;   
+        var listItem = document.createElement('button');
+    
+        listItem.textContent = citiesArray[newCity];
+        cittiesList.appendChild(listItem);
+        listItem.setAttribute('class','btn btnP btn-info btn-block');
+        listItem.setAttribute('id','search');
     
     }
 
@@ -269,11 +287,12 @@ function displayCovid(data){
 
 
 //Travel Safety Advisory
+
 function travelInfo(data){
     travelInfoEl.textContent= '';
     var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=US';
-    var travelInfo = '';
 
+    var travelInfo = '';
     var travelCard = document.createElement('div');
 
     fetch(travelInfoURL)
@@ -281,12 +300,10 @@ function travelInfo(data){
             return res.json()
         })
     .then(function (data) {
-        console.log(data);
-        searchBody.innerHTML = '';
+        console.log(data['data'].US.advisory.message);
 
         if (searchCountry == 'US'){
-            travelInfo = data["us"];
-
+            travelInfo = data['data'].US.advisory.message;
 
            var travelEl = document.createElement('p');
 
@@ -299,3 +316,11 @@ function travelInfo(data){
 
     });
 }
+
+// Clear Search History from Local Storage
+function clearHistory() {
+    window.localStorage.clear();
+    window.location.reload();
+}
+
+document.getElementById('clear').onclick = clearHistory;
