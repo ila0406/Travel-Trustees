@@ -272,7 +272,7 @@ function displayCovid(data){
 
 
 //Travel Safety Advisory
-function travelInfo(data){
+function travelInfo(){
     travelInfoEl.innerHTML= '';
     var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=US';
     var travelInfo = '';
@@ -284,11 +284,11 @@ function travelInfo(data){
             return res.json()
         })
     .then(function (data) {
-        console.log(data);
+        console.log(data['data'].US.advisory.message);
         searchBody.innerHTML = '';
 
         if (searchCountry == 'US'){
-            travelInfo = data["us"];
+            travelInfo = data['data'].US.advisory.message;
 
 
            var travelEl = document.createElement('p');
