@@ -17,7 +17,7 @@ This App was built with the intention of being a safety tool for your travel nee
 Lighthouse report on accesibility
 ![Lighthouse](./assets/img/accessibility.png)
 ### Mockup
-![mockup](./assets/images/mockup.gif)
+![mockup](./assets/img/mockup.gif)
 ## Usage
 This App is meant to be used as a helpful tool for your safe Travels. This will generate the local Covid cases, local airports, the weather, and the air quality near your destination.
 ![Before Search](assets/img/before.png)
