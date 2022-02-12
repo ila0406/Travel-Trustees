@@ -70,7 +70,7 @@ function geocode(event){
     
         listItem.textContent = citiesArray[newCity];
         cittiesList.appendChild(listItem);
-        listItem.setAttribute('class','btn btnP btn-info btn-block');
+        listItem.setAttribute('class','btn btnP btn-info btn-block mb-4 p-4');
         listItem.setAttribute('id','search');
     
     }
