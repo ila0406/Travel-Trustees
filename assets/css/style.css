@@ -35,3 +35,9 @@ footer {
     background-color: black;
     color: white;
 }
+
+.forecastCard{
+    display: inline-block;
+    margin: 4%;
+}
+
