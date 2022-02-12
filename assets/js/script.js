@@ -32,7 +32,7 @@ resultsContainerEl.setAttribute('class', 'hide');
 // This is the event for when the user clicks on the search button
 $(search).click(geocode);
 $(search).click(displayCovid);
-$(search).click(travelInfo);
+// $(search).click(travelInfo);
 
 // Geocode API
 function geocode(event){
@@ -55,6 +55,7 @@ function geocode(event){
             console.log('This is the Country being used in Covid Function: ' + searchCountry);
             weatherSearch(data);
             nearbyAirports(data);
+            travelInfo(data);
             resultsContainerEl.removeAttribute('class');
         })
     console.log('This is the Location name: ' +cityName);
@@ -290,8 +291,8 @@ function displayCovid(data){
 
 function travelInfo(data){
     travelInfoEl.textContent= '';
-    var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=US';
-
+    var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=' + searchCountry;
+    console.log(travelInfoURL);
     var travelInfo = '';
     var travelCard = document.createElement('div');
 
@@ -300,7 +301,6 @@ function travelInfo(data){
             return res.json()
         })
     .then(function (data) {
-        console.log(data['data'].US.advisory.message);
 
         if (searchCountry == 'US'){
             travelInfo = data['data'].US.advisory.message;
@@ -312,6 +312,50 @@ function travelInfo(data){
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
           
+        }
+        else if (searchCountry == 'GB'){
+            travelInfo = data['data'].GB.advisory.message;
+
+           var travelEl = document.createElement('p');
+
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
+
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
+        
+        }
+        else if (searchCountry == 'NZ'){
+            travelInfo = data['data'].NZ.advisory.message;
+
+           var travelEl = document.createElement('p');
+
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
+
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
+
+        }
+        else if (searchCountry == 'CA'){
+            travelInfo = data['data'].CA.advisory.message;
+
+           var travelEl = document.createElement('p');
+
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
+
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
+
+        }
+        else if (searchCountry == 'MX'){
+            travelInfo = data['data'].MX.advisory.message;
+
+           var travelEl = document.createElement('p');
+
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
+
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
+
         }
 
     });
