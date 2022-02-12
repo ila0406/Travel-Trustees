@@ -8,6 +8,7 @@ var searchBody = document.createElement('ul');
 var forecastBody = $('#weather-content')
 var forecastCard = document.createElement('div');
 var travelInfoEl = $('#travel-content');
+var travelCard = document.createElement('div');
 var Localstorage = localStorage;
 var cities = [];
 
@@ -296,9 +297,8 @@ function displayCovid(data){
 function travelInfo(data){
     travelInfoEl.textContent= '';
     var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=' + searchCountry;
-    console.log(travelInfoURL);
     var travelInfo = '';
-    var travelCard = document.createElement('div');
+    travelCard.textContent = '';
 
     fetch(travelInfoURL)
         .then(function (res)   {
