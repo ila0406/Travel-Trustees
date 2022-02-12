@@ -20,7 +20,9 @@ Lighthouse report on accesibility
 ![mockup](./assets/images/mockup.gif)
 ## Usage
 This App is meant to be used as a helpful tool for your safe Travels. This will generate the local Covid cases, local airports, the weather, and the air quality near your destination.
-    ![alt text](assets/img/screenshot.png)
+![Before Search](assets/img/before.png)
+
+![After Search](assets/img/after.png)
 ## Credits
 - Josh Tibbitts
 - Delilah Haas
