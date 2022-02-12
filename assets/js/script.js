@@ -6,7 +6,7 @@ var searchFormEl = document.querySelector('#search-form');
 var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastCard = document.createElement('div');
-var forecastBody = $('')
+var forecastBody = $('weather-content')
 var travelInfoEl = document.querySelector('tbd-content');
 
 var search = $('#search-submit');
@@ -72,7 +72,7 @@ function nearbyAirports(data){
     .then(data =>{
         console.log(data.response);
 
-        searchBody.innerHTML = '';
+        searchBody.textContent = '';
 
 
         for (i=0; i<5; i++) {
@@ -168,7 +168,7 @@ function displayCovid(data){
     .then(function (data) {
         console.log(data);
         console.log('Output list of countries + covid cases')
-        searchBody.innerHTML = '';
+        searchBody.textContent = '';
 
         if (searchCountry == 'US'){
             population = data[212]['population'];
