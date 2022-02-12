@@ -8,6 +8,7 @@ var searchBody = document.createElement('ul');
 var forecastBody = $('#weather-content')
 var forecastCard = document.createElement('div');
 var travelInfoEl = $('#travel-content');
+var travelCard = document.createElement('div');
 var Localstorage = localStorage;
 var cities = [];
 
@@ -32,7 +33,7 @@ resultsContainerEl.setAttribute('class', 'hide');
 // This is the event for when the user clicks on the search button
 $(search).click(geocode);
 $(search).click(displayCovid);
-$(search).click(travelInfo);
+// $(search).click(travelInfo);
 
 // Geocode API
 function geocode(event){
@@ -53,6 +54,7 @@ function geocode(event){
             // console.log('This is the Country being used in Covid Function: ' + searchCountry);
             weatherSearch(data);
             nearbyAirports(data);
+            travelInfo(data);
             resultsContainerEl.removeAttribute('class');
         })
 
@@ -125,6 +127,8 @@ function weatherSearch(data){
 }
 
 function forecast(data){
+    forecastBody.empty();
+
     for (i=0; i<5; i++){
         forecastWicon = data['daily'][i]['weather'][0].icon;
         var forecastIconUrl = 'https://openweathermap.org/img/wn/' + forecastWicon + '.png';
@@ -137,6 +141,7 @@ function forecast(data){
 
         var forecastCard = document.createElement('div');
         var forecastWiconEl = document.createElement('img');
+        var momentDay = moment(forecastDay * 1000).format("MM/DD/YYYY");
         var forecastTempEl = document.createElement('p');
         var forecastWindEl = document.createElement('p');
         var forecastHumidityEl = document.createElement('p');
@@ -151,6 +156,7 @@ function forecast(data){
 
         forecastCard.classList.add('forecastCard');
         forecastCard.append(forecastWiconEl);
+        forecastCard.append(momentDay);
         forecastCard.append(forecastTempEl);
         forecastCard.append(forecastWindEl);
         forecastCard.append(forecastHumidityEl);
@@ -287,17 +293,15 @@ function displayCovid(data){
 
 function travelInfo(data){
     travelInfoEl.textContent= '';
-    var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=US';
-
+    var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=' + searchCountry;
     var travelInfo = '';
-    var travelCard = document.createElement('div');
+    travelCard.textContent = '';
 
     fetch(travelInfoURL)
         .then(function (res)   {
             return res.json()
         })
     .then(function (data) {
-        console.log(data['data'].US.advisory.message);
 
         if (searchCountry == 'US'){
             travelInfo = data['data'].US.advisory.message;
@@ -309,6 +313,50 @@ function travelInfo(data){
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
           
+        }
+        else if (searchCountry == 'GB'){
+            travelInfo = data['data'].GB.advisory.message;
+
+           var travelEl = document.createElement('p');
+
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
+
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
+        
+        }
+        else if (searchCountry == 'NZ'){
+            travelInfo = data['data'].NZ.advisory.message;
+
+           var travelEl = document.createElement('p');
+
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
+
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
+
+        }
+        else if (searchCountry == 'CA'){
+            travelInfo = data['data'].CA.advisory.message;
+
+           var travelEl = document.createElement('p');
+
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
+
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
+
+        }
+        else if (searchCountry == 'MX'){
+            travelInfo = data['data'].MX.advisory.message;
+
+           var travelEl = document.createElement('p');
+
+            $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
+
+            travelCard.append(travelEl);
+            travelInfoEl.append(travelCard);
+
         }
 
     });
