@@ -20,7 +20,7 @@
 
       <!-- <main class='grid grid-cols-1'> -->
       <main class='grid grid-cols-2'>
-        <div class='container mx-auto px-10 bg-gradient-to-r from-teal-500 to-sky-500'>
+        <div class='container mx-auto px-10 bg-gradient-to-r from-teal-500 to-sky-500 navbar'>
             
               <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
                 The best app for your 
@@ -42,6 +42,10 @@
               <input id='search' class='form-input' type='text' placeholder='City Name!'>
               <button id ='search-submit' class='btn btn-main bg-sky-600 hover:bg-sky-700'>Search</button>
             </form>
+
+            <p>Previous Searchs</p>
+            <ul id='history' class="col-8 mb-3 text-info"></ul>
+            <button id="clear">Clear search</button>
         </div>
 
         <!-- Returned results -->

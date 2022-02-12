@@ -7,7 +7,9 @@ var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastCard = document.createElement('div');
 var forecastBody = $('weather-content')
-var travelInfoEl = $('travel-content');
+var travelInfoEl = $('tbd-content');
+var Localstorage = localStorage;
+var cities = [];
 
 var search = $('#search-submit');
 geocodeApiKey = 'a19e123a3b1cf7f00d08b299db07954c';
@@ -54,7 +56,22 @@ function geocode(event){
             nearbyAirports(data);
             resultsContainerEl.removeAttribute('class');
         })
+    console.log('This is the Location name: ' +cityName);
+
+        // Store searched cities in Local Storage for future use
+        cities.push(cityName);
+        //cities.push(locationNameS);
+        localStorage.setItem('cities', JSON.stringify(cities));
+        var citiesArray = JSON.parse(Localstorage.getItem('cities'));
     
+        var cittiesList = document.querySelector('ul');
+        var newCity = citiesArray.length - 1;   
+        var listItem = document.createElement('button');
+    
+        listItem.textContent = citiesArray[newCity];
+        cittiesList.appendChild(listItem);
+        listItem.setAttribute('class','btn btnP btn-info btn-block');
+        listItem.setAttribute('id','search');
     
     }
 
@@ -299,3 +316,11 @@ function travelInfo(){
 
     });
 }
+
+// Clear Search History from Local Storage
+function clearHistory() {
+    window.localStorage.clear();
+    window.location.reload();
+}
+
+document.getElementById('clear').onclick = clearHistory;
