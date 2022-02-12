@@ -7,7 +7,6 @@ var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastBody = $('#weather-content')
 var forecastCard = document.createElement('div');
-var forecastBody = $('weather-content')
 var travelInfoEl = $('#travel-content');
 var Localstorage = localStorage;
 var cities = [];
