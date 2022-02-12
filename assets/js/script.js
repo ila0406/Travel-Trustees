@@ -7,6 +7,7 @@ var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastCard = document.createElement('div');
 var forecastBody = $("")
+var travelInfoEl = document.querySelector('tbd-content');
 
 var search = $("#search-submit");
 geocodeApiKey = "a19e123a3b1cf7f00d08b299db07954c";
@@ -150,8 +151,8 @@ function forecast(data){
 //Covid Information
 function displayCovid(data){
     covidContentEl.innerHTML=''
-    var searchCity = '';
-    var searchTodayCount = '';
+    // var searchCity = '';
+    // var searchTodayCount = '';
     console.log(search);    
     var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1';
     var population = '';
@@ -265,16 +266,46 @@ function displayCovid(data){
              covidContentEl.append(covidCard);
 
         }
-        else    {
-        }
-        searchCard.append(searchBody);
-        searchContentEl.append(searchCard);
+        // else    {
+        // }
+        // searchCard.append(searchBody);
+        // searchContentEl.append(searchCard);
     })
 
 }
 
 
-//Crime Rates
+//Travel Safety Advisory
+function travelInfo(data){
+travelInfoEl.innerHTML=''
+    var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=US';
+    var travelInfo = '';
+
+    var travelCard = document.createElement("div")
+
+    fetch(travelInfoURL)
+        .then(function (res)   {
+            return res.json()
+        })
+    .then(function (data) {
+        console.log(data);
+        // searchBody.innerHTML = "";
+
+        // if (searchCountry == 'US'){
+        //     // travelInfo = ;
+
+
+        //    var travelEl = document.createElement("p");
+
+        //     $(travelEl).text(`Population: ${travelInfo}`);
+
+        //     travelCard.append(travelEl);
+        //     travelInfoEl.append(travelCard);
+          
+        // }
+
+    });
+}
 
 
 
