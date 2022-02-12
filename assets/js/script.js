@@ -152,8 +152,6 @@ function forecast(data){
 //Covid Information
 function displayCovid(data){
     covidContentEl.innerHTML=''
-    // var searchCity = '';
-    // var searchTodayCount = '';
     console.log(search);    
     var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1';
     var population = '';
@@ -267,10 +265,7 @@ function displayCovid(data){
              covidContentEl.append(covidCard);
 
         }
-        // else    {
-        // }
-        // searchCard.append(searchBody);
-        // searchContentEl.append(searchCard);
+
     })
 
 }
@@ -278,11 +273,11 @@ function displayCovid(data){
 
 //Travel Safety Advisory
 function travelInfo(data){
-// travelInfoEl.innerHTML='';
+    travelInfoEl.innerHTML= '';
     var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=US';
     var travelInfo = '';
 
-    var travelCard = document.createElement('div')
+    var travelCard = document.createElement('div');
 
     fetch(travelInfoURL)
         .then(function (res)   {
@@ -290,13 +285,13 @@ function travelInfo(data){
         })
     .then(function (data) {
         console.log(data);
-        searchBody.innerHTML = "";
+        searchBody.innerHTML = '';
 
         if (searchCountry == 'US'){
             travelInfo = data["us"];
 
 
-           var travelEl = document.createElement("p");
+           var travelEl = document.createElement('p');
 
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
 
@@ -307,32 +302,3 @@ function travelInfo(data){
 
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
