@@ -4,6 +4,7 @@ var searchContentEl = document.querySelector('#search-content');
 var covidContentEl = document.querySelector('#covid-content');
 var searchFormEl = document.querySelector('#search-form');
 var resultsContainerEl = document.getElementById('results-container');
+// var resultsContainerEl = document.getElementById('main-container');
 var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastBody = $('#weather-content')
@@ -47,6 +48,7 @@ function geocode(event){
             nearbyAirports(data);
             travelInfo(data);
             resultsContainerEl.removeAttribute('class'); // Unhide Results column
+            // mainContainerEl.setAttribute('class', 'grid-cols-2')
         })
 
         // Store searched cities in Local Storage for future use
@@ -154,6 +156,8 @@ function displayCovid(data){
     var population = '';
     var casePerMillion = '';
     var todayCases = '';
+    var activeMillion ='';
+    var recovered = '';
     var covidCard = document.createElement('div')
 
     fetch(queryCovidURL)
@@ -167,90 +171,130 @@ function displayCovid(data){
             population = data[212]['population'];
             casePerMillion = data[212]['casesPerOneMillion'];
             todayCases = data[212]['todayCases'];
+            activeMillion = data[212]['activePerOneMillion'];
+            recovered = data[212]['recovered'];
 
             var populationEl = document.createElement('p');
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
+            var activeMillionEl = document.createElement('p');
+            var recoveredEl = document.createElement('p');
 
             $(populationEl).text(`Population: ${population}`);
             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+            $(activeMillionEl).text(`Active cases Per Million People: ${activeMillion}`);
+            $(recoveredEl).text(`Total recovered: ${recovered}`);
 
             covidCard.append(populationEl);
             covidCard.append(casePerMillionEl);
             covidCard.append(todayCasesEl);
+            covidCard.append(activeMillionEl);
+            covidCard.append(recoveredEl);
             covidContentEl.append(covidCard);
         }
         else if (searchCountry == 'GB'){
             population = data[211]['population'];
             casePerMillion = data[211]['casesPerOneMillion'];
             todayCases = data[211]['todayCases'];
+            activeMillion = data[211]['activePerOneMillion'];
+            recovered = data[211]['recovered'];
 
             var populationEl = document.createElement('p');
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
- 
+            var activeMillionEl = document.createElement('p');
+            var recoveredEl = document.createElement('p');
+
             $(populationEl).text(`Population: ${population}`);
             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+            $(activeMillionEl).text(`Active cases Per Million People: ${activeMillion}`);
+            $(recoveredEl).text(`Total recovered: ${recovered}`);
 
             covidCard.append(populationEl);
             covidCard.append(casePerMillionEl);
             covidCard.append(todayCasesEl);
+            covidCard.append(activeMillionEl);
+            covidCard.append(recoveredEl);
             covidContentEl.append(covidCard);
         }
         else if (searchCountry == 'NZ'){
             population = data[146]['population'];
             casePerMillion = data[146]['casesPerOneMillion'];
             todayCases = data[146]['todayCases'];
+            activeMillion = data[146]['activePerOneMillion'];
+            recovered = data[146]['recovered'];
 
             var populationEl = document.createElement('p');
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
- 
+            var activeMillionEl = document.createElement('p');
+            var recoveredEl = document.createElement('p');
+
             $(populationEl).text(`Population: ${population}`);
             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+            $(activeMillionEl).text(`Active cases Per Million People: ${activeMillion}`);
+            $(recoveredEl).text(`Total recovered: ${recovered}`);
 
             covidCard.append(populationEl);
             covidCard.append(casePerMillionEl);
             covidCard.append(todayCasesEl);
+            covidCard.append(activeMillionEl);
+            covidCard.append(recoveredEl);
             covidContentEl.append(covidCard);
         }
         else if (searchCountry == 'CA'){
             population = data[35]['population'];
             casePerMillion = data[35]['casesPerOneMillion'];
             todayCases = data[35]['todayCases'];
+            activeMillion = data[35]['activePerOneMillion'];
+            recovered = data[35]['recovered'];
 
             var populationEl = document.createElement('p');
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
- 
+            var activeMillionEl = document.createElement('p');
+            var recoveredEl = document.createElement('p');
+
             $(populationEl).text(`Population: ${population}`);
             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+            $(activeMillionEl).text(`Active cases Per Million People: ${activeMillion}`);
+            $(recoveredEl).text(`Total recovered: ${recovered}`);
 
             covidCard.append(populationEl);
             covidCard.append(casePerMillionEl);
             covidCard.append(todayCasesEl);
+            covidCard.append(activeMillionEl);
+            covidCard.append(recoveredEl);
             covidContentEl.append(covidCard);
         }
         else if (searchCountry == 'MX'){
             population = data[132]['population'];
             casePerMillion = data[132]['casesPerOneMillion'];
             todayCases = data[132]['todayCases'];
+            activeMillion = data[132]['activePerOneMillion'];
+            recovered = data[132]['recovered'];
 
             var populationEl = document.createElement('p');
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
- 
+            var activeMillionEl = document.createElement('p');
+            var recoveredEl = document.createElement('p');
+
             $(populationEl).text(`Population: ${population}`);
             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+            $(activeMillionEl).text(`Active cases Per Million People: ${activeMillion}`);
+            $(recoveredEl).text(`Total recovered: ${recovered}`);
 
             covidCard.append(populationEl);
             covidCard.append(casePerMillionEl);
             covidCard.append(todayCasesEl);
+            covidCard.append(activeMillionEl);
+            covidCard.append(recoveredEl);
             covidContentEl.append(covidCard);
         }
     })
