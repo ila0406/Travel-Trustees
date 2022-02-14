@@ -3,6 +3,7 @@ var searchTextEl = document.querySelector('#search-text');
 var searchContentEl = document.querySelector('#search-content');
 var covidContentEl = document.querySelector('#covid-content');
 var searchFormEl = document.querySelector('#search-form');
+var resultsContainerEl = document.getElementById('results-container');
 var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastBody = $('#weather-content')
@@ -11,38 +12,29 @@ var travelInfoEl = $('#travel-content');
 var travelCard = document.createElement('div');
 var Localstorage = localStorage;
 var cities = [];
-
-
 var search = $('#search-submit');
-geocodeApiKey = 'a19e123a3b1cf7f00d08b299db07954c';
-apiKey = '37ee8ade-ff48-4981-9af3-394163c2c764';
-place = $('#search')
+var geocodeApiKey = 'a19e123a3b1cf7f00d08b299db07954c';
+var apiKey = '37ee8ade-ff48-4981-9af3-394163c2c764';
+var place = $('#search')
 var locationDisplay = $('#location');
-locationName = $('#search');
-
+var locationName = $('#search');
 var searchCountry;
-distance = 50;
+var distance = 50;
 
-var resultsContainerEl = document.getElementById('results-container');
+// Hide results Column until Search is triggered
 resultsContainerEl.setAttribute('class', 'hide');
-
-
-// events
-
 
 // This is the event for when the user clicks on the search button
 $(search).click(geocode);
 $(search).click(displayCovid);
-// $(search).click(travelInfo);
 
-// Geocode API
+// Get Country Location from Geocode API endpoint
 function geocode(event){
     var cityName = locationName.val();
-    // console.log(cityName);
     limit = '1';
     var geocodeUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&' + 'limit=' + limit + '&appid=' + geocodeApiKey;
-    // console.log(geocodeUrl);
     event.preventDefault();
+
     fetch(geocodeUrl)
         .then(function(res) {
             if (res.ok){
@@ -51,16 +43,14 @@ function geocode(event){
         })
         .then(function(data) {
             searchCountry=data[0].country; //Passing Country to Covid API
-            // console.log('This is the Country being used in Covid Function: ' + searchCountry);
             weatherSearch(data);
             nearbyAirports(data);
             travelInfo(data);
-            resultsContainerEl.removeAttribute('class');
+            resultsContainerEl.removeAttribute('class'); // Unhide Results column
         })
 
         // Store searched cities in Local Storage for future use
         cities.push(cityName);
-        //cities.push(locationNameS);
         localStorage.setItem('cities', JSON.stringify(cities));
         var citiesArray = JSON.parse(Localstorage.getItem('cities'));
     
@@ -72,65 +62,60 @@ function geocode(event){
         cittiesList.appendChild(listItem);
         listItem.setAttribute('class','btn btnP btn-info btn-block mb-4 p-4');
         listItem.setAttribute('id','search');
-    
     }
 
 
-// gets nearby Airports from API endpoint
+// Get nearby Airports from API endpoint
 function nearbyAirports(data){
     lat = data[0].lat
     lon = data[0].lon
     airportsUrl = 'https://airlabs.co/api/v9/nearby?lat=' + lat + '&lng=' + lon + '&distance=' + distance + '&api_key=' + apiKey;
+
     fetch(airportsUrl)
-    .then(response => {
-        if(response.ok)
-        return response.json();
-    })
-    .then(data =>{
+        .then(response => {
+            if(response.ok)
+            return response.json();
+        })
+        .then(data =>{
+            searchBody.textContent = '';  // Clear previous list of airports
 
-        searchBody.textContent = '';
-
-
-        for (i=0; i<5; i++) {
-            var airportName = data.response['airports'][i]['name'];
-            var bodyContentEl = document.createElement('li');
-            $(bodyContentEl).text(airportName);
-            searchBody.append(bodyContentEl);
-        }
-        searchCard.append(searchBody);
-        searchContentEl.append(searchCard);
-
-
-
-
-    
-})
+            for (i=0; i<5; i++) {
+                var airportName = data.response['airports'][i]['name'];
+                var bodyContentEl = document.createElement('li');
+                $(bodyContentEl).text(airportName);
+                searchBody.append(bodyContentEl);
+            }
+            searchCard.append(searchBody);
+            searchContentEl.append(searchCard);
+        })
 }
 
 
-// Weather Information
+// Get lat/lon from Weather API Endpoint
 function weatherSearch(data){
     var lat = data[0].lat;
     var lon = data[0].lon;
     weatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?' + 'lat=' + lat + '&lon=' + lon + '&units=imperial' + '&appid=' + geocodeApiKey;
+
     fetch(weatherApiUrl)
-    .then(response =>{
-        if(response.ok){
-            return response.json()
-        }
-    })
-    .then(data =>{
-        forecast(data)
-    })
+        .then(response =>{
+            if(response.ok){
+                return response.json()
+            }
+        })
+        .then(data =>{
+            forecast(data)
+        })
 }
 
+
+// Get 5-day Weather forecast from data returned in Weather Search Function
 function forecast(data){
     forecastBody.empty();
 
     for (i=0; i<5; i++){
         forecastWicon = data['daily'][i]['weather'][0].icon;
         var forecastIconUrl = 'https://openweathermap.org/img/wn/' + forecastWicon + '.png';
-
 
         forecastDay = data['daily'][i].dt;
         forecastWind = data['daily'][i].wind_speed;
@@ -139,7 +124,7 @@ function forecast(data){
 
         var forecastCard = document.createElement('div');
         var forecastWiconEl = document.createElement('img');
-        var momentDay = moment(forecastDay * 1000).format("MM/DD/YYYY");
+        var momentDay = moment(forecastDay * 1000).format('MM/DD/YYYY');
         var forecastTempEl = document.createElement('p');
         var forecastWindEl = document.createElement('p');
         var forecastHumidityEl = document.createElement('p');
@@ -147,10 +132,9 @@ function forecast(data){
         $(forecastWiconEl).attr('id', 'wicon');
         $(forecastWiconEl).attr('src', forecastIconUrl);
         $(forecastWiconEl).attr('alt', 'weather icon');
-
-       $(forecastTempEl).text(`Temp ${forecastTemp} F`);
-       $(forecastWindEl).text(`Wind: ${forecastWind} MPH`);
-       $(forecastHumidityEl).text(`Humidity ${forecastHumidity} %`);
+        $(forecastTempEl).text(`Temp ${forecastTemp} F`);
+        $(forecastWindEl).text(`Wind: ${forecastWind} MPH`);
+        $(forecastHumidityEl).text(`Humidity ${forecastHumidity} %`);
 
         forecastCard.classList.add('forecastCard');
         forecastCard.append(forecastWiconEl);
@@ -158,22 +142,18 @@ function forecast(data){
         forecastCard.append(forecastTempEl);
         forecastCard.append(forecastWindEl);
         forecastCard.append(forecastHumidityEl);
-
-       forecastBody.append(forecastCard);
-    //    console.log(data['daily'][i]);
+        forecastBody.append(forecastCard);
     }
 }
 
 
-//Covid Information
+//Get Covid stats from Covid API endpoint
 function displayCovid(data){
     covidContentEl.innerHTML=''
-    // console.log(search);    
     var queryCovidURL = 'https://corona.lmao.ninja/v2/countries?yesterday=&sort=?&limit=1&countrycode='  + searchCountry;
     var population = '';
     var casePerMillion = '';
     var todayCases = '';
-
     var covidCard = document.createElement('div')
 
     fetch(queryCovidURL)
@@ -181,18 +161,16 @@ function displayCovid(data){
             return res.json()
         })
     .then(function (data) {
-        console.log('Output list of countries + covid cases')
-        searchBody.textContent = '';
-
+        searchBody.textContent = ''; // Clear previous list of stats
+        // Output Travel Advisory based on Country drop down
         if (searchCountry == 'US'){
             population = data[212]['population'];
             casePerMillion = data[212]['casesPerOneMillion'];
             todayCases = data[212]['todayCases'];
 
-
-           var populationEl = document.createElement('p');
-           var casePerMillionEl = document.createElement('p');
-           var todayCasesEl = document.createElement('p');
+            var populationEl = document.createElement('p');
+            var casePerMillionEl = document.createElement('p');
+            var todayCasesEl = document.createElement('p');
 
             $(populationEl).text(`Population: ${population}`);
             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
@@ -202,7 +180,6 @@ function displayCovid(data){
             covidCard.append(casePerMillionEl);
             covidCard.append(todayCasesEl);
             covidContentEl.append(covidCard);
-          
         }
         else if (searchCountry == 'GB'){
             population = data[211]['population'];
@@ -213,15 +190,14 @@ function displayCovid(data){
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
  
-             $(populationEl).text(`Population: ${population}`);
-             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
-             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
- 
-             covidCard.append(populationEl);
-             covidCard.append(casePerMillionEl);
-             covidCard.append(todayCasesEl);
-             covidContentEl.append(covidCard);
-        
+            $(populationEl).text(`Population: ${population}`);
+            $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+            $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
+
+            covidCard.append(populationEl);
+            covidCard.append(casePerMillionEl);
+            covidCard.append(todayCasesEl);
+            covidContentEl.append(covidCard);
         }
         else if (searchCountry == 'NZ'){
             population = data[146]['population'];
@@ -232,15 +208,14 @@ function displayCovid(data){
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
  
-             $(populationEl).text(`Population: ${population}`);
-             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
-             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
- 
-             covidCard.append(populationEl);
-             covidCard.append(casePerMillionEl);
-             covidCard.append(todayCasesEl);
-             covidContentEl.append(covidCard);
+            $(populationEl).text(`Population: ${population}`);
+            $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+            $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
 
+            covidCard.append(populationEl);
+            covidCard.append(casePerMillionEl);
+            covidCard.append(todayCasesEl);
+            covidContentEl.append(covidCard);
         }
         else if (searchCountry == 'CA'){
             population = data[35]['population'];
@@ -251,15 +226,14 @@ function displayCovid(data){
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
  
-             $(populationEl).text(`Population: ${population}`);
-             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
-             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
- 
-             covidCard.append(populationEl);
-             covidCard.append(casePerMillionEl);
-             covidCard.append(todayCasesEl);
-             covidContentEl.append(covidCard);
+            $(populationEl).text(`Population: ${population}`);
+            $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+            $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
 
+            covidCard.append(populationEl);
+            covidCard.append(casePerMillionEl);
+            covidCard.append(todayCasesEl);
+            covidContentEl.append(covidCard);
         }
         else if (searchCountry == 'MX'){
             population = data[132]['population'];
@@ -270,92 +244,82 @@ function displayCovid(data){
             var casePerMillionEl = document.createElement('p');
             var todayCasesEl = document.createElement('p');
  
-             $(populationEl).text(`Population: ${population}`);
-             $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
-             $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
- 
-             covidCard.append(populationEl);
-             covidCard.append(casePerMillionEl);
-             covidCard.append(todayCasesEl);
-             covidContentEl.append(covidCard);
+            $(populationEl).text(`Population: ${population}`);
+            $(casePerMillionEl).text(`Cases Per Million People: ${casePerMillion}`);
+            $(todayCasesEl).text(`Todays Cases: ${todayCases}`);
 
+            covidCard.append(populationEl);
+            covidCard.append(casePerMillionEl);
+            covidCard.append(todayCasesEl);
+            covidContentEl.append(covidCard);
         }
-
     })
-
 }
 
 
-//Travel Safety Advisory
-
+// Get Travel Safety Advisory from Advisory API Endpoint
 function travelInfo(data){
-    travelInfoEl.textContent= '';
+    travelInfoEl.textContent= ''; // Clear previous advisory
     var travelInfoURL = 'https://www.travel-advisory.info/api?countrycode=' + searchCountry;
     var travelInfo = '';
-    travelCard.textContent = '';
+    travelCard.textContent = ''; // Clear previous travel card
 
     fetch(travelInfoURL)
         .then(function (res)   {
             return res.json()
         })
     .then(function (data) {
-
+        // Output Travel Advisory based on Country drop down
         if (searchCountry == 'US'){
             travelInfo = data['data'].US.advisory.message;
 
-           var travelEl = document.createElement('p');
+            var travelEl = document.createElement('p');
 
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
 
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
-          
         }
         else if (searchCountry == 'GB'){
             travelInfo = data['data'].GB.advisory.message;
 
-           var travelEl = document.createElement('p');
+            var travelEl = document.createElement('p');
 
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
 
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
-        
         }
         else if (searchCountry == 'NZ'){
             travelInfo = data['data'].NZ.advisory.message;
 
-           var travelEl = document.createElement('p');
+            var travelEl = document.createElement('p');
 
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
 
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
-
         }
         else if (searchCountry == 'CA'){
             travelInfo = data['data'].CA.advisory.message;
 
-           var travelEl = document.createElement('p');
+            var travelEl = document.createElement('p');
 
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
 
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
-
         }
         else if (searchCountry == 'MX'){
             travelInfo = data['data'].MX.advisory.message;
 
-           var travelEl = document.createElement('p');
+            var travelEl = document.createElement('p');
 
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
 
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
-
         }
-
     });
 }
 

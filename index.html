@@ -19,61 +19,62 @@
       <!-- Banner separating header from main section of page -->
       <div id='hero-image' title='Night sky at dusk - banner image'></div>
 
-      <!-- <main class='grid grid-cols-1'> -->
+      <!-- <main class='grid grid-cols-1> -->
       <main class='grid grid-cols-2'>
         <div class='container mx-auto px-10 bg-gradient-to-r from-teal-500 to-sky-500 navbar'>
             
-              <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
-                The best app for your 
-                  <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
-                  <span class='relative text-white'>safe travel</span></span>
-                needs. We provide all of the details you need to ensure that your travel is fun, enjoyable, and especially safe.
-            </blockquote>
+          <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
+            The best app for your 
+              <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
+              <span class='relative text-white'>safe travel</span></span>
+            needs. We provide all of the details you need to ensure that your travel is fun, enjoyable, and especially safe.
+          </blockquote>
 
-            <!-- Search Form -->
-            <form id='search-form' class='box-content h-40 w-100 p-4 border-4'>
-              <select id='options'>
-                  <option value='' disabled selected>Search country</option>
-                  <option value='UK'>UK</option>
-                  <option value='US'>US</option>
-                  <option value='New_Zealand'>New Zealand</option>
-                  <option value='Canada'>Canada</option>
-                  <option value='Mexico'>Mexico</option>
-              </select>
-              <input id='search' class='form-input' type='text' placeholder='City Name!'>
-              <button id ='search-submit' class='btn btn-main bg-red-500 hover:bg-sky-700'>Search</button>
-            </form>
+          <!-- Search Form -->
+          <form id='search-form' class='box-content h-40 w-100 p-4 border-4'>
+            <select id='options'>
+                <option value='' disabled selected>Search country</option>
+                <option value='UK'>UK</option>
+                <option value='US'>US</option>
+                <option value='New_Zealand'>New Zealand</option>
+                <option value='Canada'>Canada</option>
+                <option value='Mexico'>Mexico</option>
+            </select>
+            <input id='search' class='form-input' type='text' placeholder='City Name!'>
+            <button id ='search-submit' class='btn btn-main bg-red-500 hover:bg-sky-700'>Search</button>
+          </form>
             
-            <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
-              Previous results for...  </blockquote>
-            <div id='search-history' class='box-content w-100 p-4 border-4'>
-              <ul id='history'></ul>
-              <button id ='clear' class='btn btn-main m-4 p-4 bg-red-500 hover:bg-sky-700 '>Clear</button>
-            </div>
+          <!-- Search History -->
+          <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
+            Previous results for...  </blockquote>
+          <div id='search-history' class='box-content w-100 p-4 border-4'>
+            <ul id='history'></ul>
+            <button id ='clear' class='btn btn-main m-4 p-4 bg-red-500 hover:bg-sky-700 '>Clear</button>
+          </div>
         </div>
 
         <!-- Returned results -->
         <section id='results-container'>
           <!-- Nearby Airports returned by API -->
           <div class='search-results container mx-auto px-10 bg-gradient-to-r from-sky-500 to-teal-500'>
-              <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
-                  Showing results for  
-                  <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
-                  <span class='relative text-white'>Nearby Airports</span></span>
-                  ....
-              </blockquote>
-              <div id='search-content' class='box-content h-32 w-100 p-4 border-4'>
-              </div>
+            <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
+              Showing results for  
+              <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
+              <span class='relative text-white'>Nearby Airports</span></span>
+              ....
+            </blockquote>
+            <div id='search-content' class='box-content h-32 w-100 p-4 border-4'>
+            </div>
           </div>
 
           <!-- Covid Stats returned by API -->
           <div class='search-results container mx-auto px-10 bg-gradient-to-r from-sky-500 to-teal-500'>
             <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
               Showing results for  
-                  <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
-                  <span class='relative text-white'>Covid Stats</span></span>
-                  ....
-              </blockquote>
+              <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
+              <span class='relative text-white'>Covid Stats</span></span>
+              ....
+            </blockquote>
             <div id='covid-content' class='box-content h-32 w-100 p-4 border-4'></div>
           </div>
 
@@ -81,10 +82,10 @@
           <div class='search-results container mx-auto px-10 bg-gradient-to-r from-sky-500 to-teal-500'>
             <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
               Showing results for  
-                  <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
-                  <span class='relative text-white'>5-day Forecast</span></span>
-                  ....
-              </blockquote>
+                <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
+                <span class='relative text-white'>5-day Forecast</span></span>
+                ....
+            </blockquote>
             <div id='weather-content' class='box-content  w-100 p-4 border-4'></div>
           </div>
 
@@ -92,9 +93,9 @@
           <div class='search-results container mx-auto px-10 bg-gradient-to-r from-sky-500 to-teal-500'>
             <blockquote class='p-main text-2xl font-semibold italic text-center text-slate-900'>
               Showing results for  
-                  <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
-                  <span class='relative text-white'>Travel Safety Rating</span></span>
-                  ....
+                <span class='before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-red-500 relative inline-block'>
+                <span class='relative text-white'>Travel Safety Rating</span></span>
+                ....
               </blockquote>
             <div id='travel-content' class='box-content h-32 w-100 p-4 border-4'></div>
           </div>
@@ -110,11 +111,7 @@
             <div id='tbd-content' class='box-content h-32 w-100 p-4 border-4'></div>
           </div> -->
       </section>
-
     </main>
-
-
-
 
     <footer>
         <h2>Made with ❤️️ by trusty-trustee-travel-pals</h2>
