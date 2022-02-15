@@ -4,7 +4,7 @@ var searchContentEl = document.querySelector('#search-content');
 var covidContentEl = document.querySelector('#covid-content');
 var searchFormEl = document.querySelector('#search-form');
 var resultsContainerEl = document.getElementById('results-container');
-// var resultsContainerEl = document.getElementById('main-container');
+// var mainContainerEl = document.getElementById('main-container');
 var searchCard = document.createElement('div');
 var searchBody = document.createElement('ul');
 var forecastBody = $('#weather-content')
@@ -32,7 +32,7 @@ $(search).click(displayCovid);
 // Get Country Location from Geocode API endpoint
 function geocode(event){
     var cityName = locationName.val();
-    limit = '1';
+    var limit = '1';
     var geocodeUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + cityName + '&' + 'limit=' + limit + '&appid=' + geocodeApiKey;
     event.preventDefault();
 
@@ -97,7 +97,7 @@ function nearbyAirports(data){
 function weatherSearch(data){
     var lat = data[0].lat;
     var lon = data[0].lon;
-    weatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?' + 'lat=' + lat + '&lon=' + lon + '&units=imperial' + '&appid=' + geocodeApiKey;
+    var weatherApiUrl = 'https://api.openweathermap.org/data/2.5/onecall?' + 'lat=' + lat + '&lon=' + lon + '&units=imperial' + '&appid=' + geocodeApiKey;
 
     fetch(weatherApiUrl)
         .then(response =>{
@@ -116,13 +116,12 @@ function forecast(data){
     forecastBody.empty();
 
     for (i=0; i<5; i++){
-        forecastWicon = data['daily'][i]['weather'][0].icon;
+        var forecastWicon = data['daily'][i]['weather'][0].icon;
         var forecastIconUrl = 'https://openweathermap.org/img/wn/' + forecastWicon + '.png';
-
-        forecastDay = data['daily'][i].dt;
-        forecastWind = data['daily'][i].wind_speed;
-        forecastTemp =  data['daily'][i].temp.max;
-        forecastHumidity = data['daily'][i].humidity;
+        var forecastDay = data['daily'][i].dt;
+        var forecastWind = data['daily'][i].wind_speed;
+        var forecastTemp =  data['daily'][i].temp.max;
+        var forecastHumidity = data['daily'][i].humidity;
 
         var forecastCard = document.createElement('div');
         var forecastWiconEl = document.createElement('img');
@@ -316,51 +315,36 @@ function travelInfo(data){
         // Output Travel Advisory based on Country drop down
         if (searchCountry == 'US'){
             travelInfo = data['data'].US.advisory.message;
-
             var travelEl = document.createElement('p');
-
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
-
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
         }
         else if (searchCountry == 'GB'){
             travelInfo = data['data'].GB.advisory.message;
-
             var travelEl = document.createElement('p');
-
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
-
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
         }
         else if (searchCountry == 'NZ'){
             travelInfo = data['data'].NZ.advisory.message;
-
             var travelEl = document.createElement('p');
-
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
-
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
         }
         else if (searchCountry == 'CA'){
             travelInfo = data['data'].CA.advisory.message;
-
             var travelEl = document.createElement('p');
-
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
-
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
         }
         else if (searchCountry == 'MX'){
             travelInfo = data['data'].MX.advisory.message;
-
             var travelEl = document.createElement('p');
-
             $(travelEl).text(`Country Safety Rating: ${travelInfo}`);
-
             travelCard.append(travelEl);
             travelInfoEl.append(travelCard);
         }
